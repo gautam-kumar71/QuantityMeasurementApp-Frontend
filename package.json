@@ -1,0 +1,25 @@
+{
+  "name": "quantity-measurement-app",
+  "version": "1.0.0",
+  "description": "A web application for quantity measurement, conversion, comparison, and arithmetic operations",
+  "main": "js/app.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3000",
+    "dev": "json-server --watch db.json --port 3000",
+    "server": "json-server --watch db.json --port 3000",
+    "serve": "npx serve . -l 8080"
+  },
+  "keywords": [
+    "measurement",
+    "conversion",
+    "units",
+    "calculator"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "serve": "^14.2.1"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantity Measurement</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Welcome To Quantity Measurement</h1>
+    <div class="header-buttons">
+      <button class="icon-btn history-btn" onclick="showHistory()" title="History"><img src="images/scroll.png"
+          alt="History Icon"></button>
+      <button class="icon-btn logout-btn" onclick="logout()" title="Logout"><img src="images/logout.png"
+          alt="Logout Icon"></button>
+    </div>
+  </div>
+
+  <!-- AUTH PAGE -->
+  <div id="auth-page" class="page active">
+    <div class="auth-card">
+      <!-- Left: Branding -->
+      <div class="auth-left">
+        <div class="logo-circle">
+          <!-- Warehouse worker SVG illustration -->
+          <img src="images/warehouse-worker.jpg" alt="Warehouse Worker">
+        </div>
+        <div class="brand">QUANTITY MEASUREMENT</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+
+      <!-- Right: Auth forms -->
+      <div class="auth-right">
+        <div class="tabs">
+          <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">LOGIN</button>
+          <button class="tab-btn" id="tab-signup" onclick="switchTab('signup')">SIGNUP</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div class="auth-form active" id="form-login">
+
+          <div class="field-label">Email Id</div>
+          <div class="input-wrap">
+            <span class="icon">✉</span>
+            <input type="email" placeholder="Email Id" id="login-email">
+          </div>
+
+          <div class="field-label">Password</div>
+          <div class="input-wrap">
+            <span class="icon">🔒</span>
+            <input type="password" placeholder="Password" id="login-password">
+          </div>
+
+          <div class="forgot">Forgot password?</div>
+          <button class="submit-btn" onclick="login()">Login</button>
+
+          <div class="switch-link">Don't have an account? <a onclick="switchTab('signup')">Signup</a></div>
+
+          <div class="or-divider" align="center">OR</div>
+
+          <button class="google-btn" onclick="googleAuth()">
+            <svg class="google-icon" viewBox="0 0 48 48">
+              <path fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+              <path fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+              <path fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+              <path fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+              <path fill="none" d="M0 0h48v48H0z" />
+            </svg>
+            Login with Google
+          </button>
+
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div class="auth-form" id="form-signup">
+
+          <button class="google-btn" onclick="googleAuth()">
+            <svg class="google-icon" viewBox="0 0 48 48">
+              <path fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+              <path fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+              <path fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+              <path fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+              <path fill="none" d="M0 0h48v48H0z" />
+            </svg>
+            Sign up with Google
+          </button>
+
+          <div class="or-divider">OR</div>
+
+          <div class="field-label">Full Name</div>
+          <div class="input-wrap">
+            <span class="icon">👤</span>
+            <input type="text" placeholder="Full Name" id="signup-name">
+          </div>
+
+          <div class="field-label">Mobile No.</div>
+          <div class="input-wrap">
+            <span class="icon">📞</span>
+            <input type="tel" placeholder="Mobile Number" id="signup-mobile">
+          </div>
+
+          <div class="field-label">Email Id</div>
+          <div class="input-wrap">
+            <span class="icon">✉</span>
+            <input type="email" placeholder="Email Id" id="signup-email">
+          </div>
+
+          <div class="field-label">Password</div>
+          <div class="input-wrap">
+            <span class="icon">🔒</span>
+            <input type="password" placeholder="Password" id="signup-password">
+          </div>
+
+          <button class="submit-btn" onclick="signup()">Signup</button>
+
+          <div class="switch-link">Already have an account? <a onclick="switchTab('login')">Login</a></div>
+
+        </div>
+      </div>
+
+
+      <!-- SIGNUP FORM -->
+      <div class="auth-form" id="form-signup">
+        <button class="google-btn" onclick="googleAuth()">
+          <!-- SVG unchanged -->
+          Sign up with Google
+        </button>
+
+        <div class="or-divider">OR</div>
+
+        <div class="field-label">Full Name</div>
+        <div class="input-wrap">
+          <span class="icon">👤</span>
+          <input type="text" placeholder="Full Name" id="signup-name">
+        </div>
+
+        <div class="field-label">Mobile No.</div>
+        <div class="input-wrap">
+          <span class="icon">📞</span>
+          <input type="tel" placeholder="Mobile Number" id="signup-mobile">
+        </div>
+
+        <div class="field-label">Email Id</div>
+        <div class="input-wrap">
+          <span class="icon">✉</span>
+          <input type="email" placeholder="Email Id" id="signup-email">
+        </div>
+
+        <div class="field-label">Password</div>
+        <div class="input-wrap">
+          <span class="icon">🔒</span>
+          <input type="password" placeholder="Password" id="signup-password">
+        </div>
+
+        <button class="submit-btn" onclick="signup()">Signup</button>
+
+        <div class="switch-link">
+          Already have an account? <a onclick="switchTab('login')">Login</a>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- SIGNUP FORM -->
+    <div class="auth-form" id="form-signup">
+      <button class="google-btn" onclick="googleAuth()">
+        <svg class="google-icon" viewBox="0 0 48 48">
+          <path fill="#EA4335"
+            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+          <path fill="#4285F4"
+            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+          <path fill="#FBBC05"
+            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+          <path fill="#34A853"
+            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+          <path fill="none" d="M0 0h48v48H0z" />
+        </svg>
+        Sign up with Google
+      </button>
+      <div class="or-divider">OR</div>
+      <div class="field-label">Full Name</div>
+      <div class="input-wrap">
+        <span class="icon">👤</span>
+        <input type="text" placeholder="Full Name" id="signup-name">
+      </div>
+      <div class="field-label">Mobile No.</div>
+      <div class="input-wrap">
+        <span class="icon">📞</span>
+        <input type="tel" placeholder="Mobile Number" id="signup-mobile">
+      </div>
+      <div class="field-label">Email Id</div>
+      <div class="input-wrap">
+        <span class="icon">✉</span>
+        <input type="email" placeholder="Email Id" id="signup-email">
+      </div>
+      <div class="field-label">Password</div>
+      <div class="input-wrap">
+        <span class="icon">🔒</span>
+        <input type="password" placeholder="Password" id="signup-password">
+      </div>
+      <button class="submit-btn" onclick="signup()">Signup</button>
+      <div class="switch-link">Already have an account? <a onclick="switchTab('login')">Login</a></div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div id="dashboard-page" class="page">
+    <div class="section-label">Choose Type</div>
+    <div class="type-grid">
+      <div class="type-card active" id="type-length" onclick="selectType('length')">
+        <span class="type-icon">📏</span>
+        <span>Length</span>
+      </div>
+      <div class="type-card" id="type-weight" onclick="selectType('weight')">
+        <span class="type-icon">⚖️</span>
+        <span>Weight</span>
+      </div>
+      <div class="type-card" id="type-temperature" onclick="selectType('temperature')">
+        <span class="type-icon">🌡️</span>
+        <span>Temperature</span>
+      </div>
+      <div class="type-card" id="type-volume" onclick="selectType('volume')">
+        <span class="type-icon">🧴</span>
+        <span>Volume</span>
+      </div>
+    </div>
+
+    <div class="section-label">Choose Action</div>
+    <div class="action-tabs">
+      <button class="action-tab active" id="action-comparison" onclick="selectAction('comparison')">Comparison</button>
+      <button class="action-tab" id="action-conversion" onclick="selectAction('conversion')">Conversion</button>
+      <button class="action-tab" id="action-arithmetic" onclick="selectAction('arithmetic')">Arithmetic</button>
+    </div>
+
+    <!-- Comparison / Conversion UI -->
+    <div id="dual-calc" class="calc-area">
+      <div class="calc-box">
+        <div class="calc-box-label" id="from-label">FROM</div>
+        <input type="number" id="val-from" value="1">
+        <select id="unit-from" onchange="onUnitChange()"></select>
+      </div>
+      <div class="calc-box">
+        <div class="calc-box-label" id="to-label">TO</div>
+        <input type="number" id="val-to" value="1">
+        <select id="unit-to" onchange="onUnitChange()"></select>
+      </div>
+    </div>
+
+    <!-- Arithmetic UI -->
+    <div id="arith-calc" class="arith-area">
+      <div class="arith-row">
+        <input class="arith-input" type="number" id="arith-a" value="1" placeholder="Value 1">
+        <select class="arith-op-select" id="arith-op">
+          <option value="+">+</option>
+          <option value="-">−</option>
+          <option value="*">×</option>
+          <option value="/">÷</option>
+        </select>
+        <input class="arith-input" type="number" id="arith-b" value="1" placeholder="Value 2">
+        <select class="arith-unit-select" id="arith-unit"></select>
+      </div>
+    </div>
+
+    <button class="action-btn" id="main-action-btn" onclick="calculate()">Compare</button>
+
+    <div class="result-box" id="result-box">
+      <div class="result-label">Result</div>
+      <div class="result-value" id="result-value"></div>
+      <div class="result-note" id="result-note"></div>
+    </div>
+  </div>
+
+  <!-- HISTORY MODAL -->
+  <div id="history-modal" class="history-overlay">
+    <div class="history-panel">
+      <div class="history-panel-header">
+        <div class="history-panel-title">
+          <img src="images/scroll.png" alt="History" class="history-panel-icon">
+          <span>Calculation History</span>
+        </div>
+        <div class="history-panel-actions">
+          <button class="history-clear-btn" onclick="clearAllHistory()" title="Clear All">🗑 Clear All</button>
+          <button class="history-close-btn" onclick="closeHistoryModal()" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+  </div>
+
+  <!-- CUSTOM POPUP -->
+  <div id="custom-popup" class="popup-overlay">
+    <div class="popup-content">
+      <div class="popup-icon">✅</div>
+      <div class="popup-title" id="popup-title">Success!</div>
+      <div class="popup-message" id="popup-message">Operation completed successfully.</div>
+      <button class="popup-btn" onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
