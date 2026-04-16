@@ -1,4 +1,4 @@
-# Quantity Measurement Frontend (Angular)
+# Quantity Measurement Frontend (Angular) For Microservices
 
 Angular 21 frontend for the Quantity Measurement Spring Boot backend.
 

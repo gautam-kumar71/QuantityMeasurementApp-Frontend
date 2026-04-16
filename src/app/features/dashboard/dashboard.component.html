@@ -1,0 +1,63 @@
+<div class="dashboard-shell fade-in">
+  <div class="header-section">
+    <h2 class="title">Measurement Hub</h2>
+    <p class="subtitle">Select your dimension and define the operation</p>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Section 1: Select Dimension -->
+    <section class="dimension-section">
+      <h3>Select Dimension</h3>
+      <div class="dimension-grid">
+        <button 
+          *ngFor="let type of ['length', 'weight', 'temperature', 'volume']" 
+          class="dimension-card"
+          [class.active]="selectedType === type"
+          (click)="selectType(type)">
+          <div class="dimension-icon" [ngSwitch]="type">
+            <svg *ngSwitchCase="'length'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23.1 3.1a2 2 0 0 0-2.8 0L3.1 20.3a2 2 0 0 0 0 2.8c.4.4 1 .6 1.4.6s1-.2 1.4-.6L23.1 5.9a2 2 0 0 0 0-2.8ZM7 17l2 2M10 14l2 2M13 11l2 2M16 8l2 2"/></svg>
+            <svg *ngSwitchCase="'weight'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8c0 3 1.7 5.7 4.3 7 1.3.7 2.3 1.8 2.3 3.2v.8h2.8v-.8c0-1.4 1-2.5 2.3-3.2 2.6-1.3 4.3-4 4.3-7Zm-8 2c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2Z"/></svg>
+            <svg *ngSwitchCase="'temperature'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+            <svg *ngSwitchCase="'volume'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-4-9 4 9 4 9-4ZM21 16l-9-4-9 4 9 4 9-4Z"/><path d="M3 8v8"/><path d="M12 12v8"/><path d="M21 8v8"/></svg>
+          </div>
+          <span>{{ type | titlecase }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Section 2: Choose Operation -->
+    <section class="operation-section">
+      <h3>Choose Operation</h3>
+      <div class="operation-list">
+        <button 
+          *ngFor="let act of [
+            {id: 'conversion', label: 'Convert'},
+            {id: 'comparison', label: 'Compare'},
+            {id: 'arithmetic', label: 'Calculate'},
+            {id: 'history', label: 'History'}
+          ]"
+          class="operation-btn"
+          [class.active]="selectedAction === act.id"
+          [class.disabled]="act.id === 'history' && !(authService.isAuthenticated$ | async)"
+          (click)="selectAction(act.id)">
+          {{ act.label }}
+          <span *ngIf="act.id === 'history' && !(authService.isAuthenticated$ | async)" class="login-hint">(Login required)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Active Component Area -->
+    <section class="operational-view card fade-in" *ngIf="selectedAction && selectedType">
+      <div class="view-header">
+        <h3>{{ selectedAction === 'conversion' ? (selectedType | titlecase) + ' Conversion' : (selectedAction | titlecase) }}</h3>
+        <p>Perform precise {{ selectedAction }} operations with {{ selectedType }} units.</p>
+      </div>
+
+      <div class="component-content">
+        <app-converter *ngIf="selectedAction === 'conversion'" [selectedType]="selectedType"></app-converter>
+        <app-calculator *ngIf="selectedAction === 'comparison'" [selectedType]="selectedType"></app-calculator>
+        <app-arithmetic *ngIf="selectedAction === 'arithmetic'" [selectedType]="selectedType"></app-arithmetic>
+      </div>
+    </section>
+  </div>
+</div>

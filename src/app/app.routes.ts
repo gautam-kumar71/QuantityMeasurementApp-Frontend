@@ -1,43 +1,20 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth-guard';
+import { authGuard } from './core/guards/auth.guard';
+import { publicOnlyGuard } from './core/guards/public-only.guard';
+import { LoginComponent } from './features/login/login.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { HistoryComponent } from './features/history/history.component';
+import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './features/reset-password/reset-password.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login').then((m) => m.LoginComponent),
-  },
-  {
-    path: 'signup',
-    loadComponent: () => import('./pages/signup/signup').then((m) => m.SignupComponent),
-  },
-  {
-    path: 'forgot-password',
-    loadComponent: () =>
-      import('./pages/forgot-password/forgot-password').then((m) => m.ForgotPasswordComponent),
-  },
-  {
-    path: 'measurement',
-    loadComponent: () =>
-      import('./pages/measurement/measurement').then((m) => m.MeasurementComponent),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'history',
-    loadComponent: () => import('./pages/history/history').then((m) => m.HistoryComponent),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'dashboard',
-    loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.DashboardComponent),
-    canActivate: [authGuard],
-  },
-  {
-    path: '**',
-    redirectTo: 'login',
-  },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'oauth2/redirect', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [publicOnlyGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [publicOnlyGuard] },
+
+  { path: 'history', component: HistoryComponent, canActivate: [authGuard] },
+  { path: '**', redirectTo: '/dashboard' }
 ];
